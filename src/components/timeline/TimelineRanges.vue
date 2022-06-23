@@ -1,16 +1,25 @@
 <script setup>
+import { ref, computed } from 'vue';
 import TimelineRange from './TimelineRange.vue';
 import NameLabel from '../utils/NameLabel.vue';
+import { useEditorStore } from '../../stores/editorStore';
 
-defineProps({
-    width: Number
-})
+const store = useEditorStore()
+const timelineRanges = ref(null)
 </script>
 
 <template>
-    <div class="timeline-ranges" :style="`width: ${width}px;`">
-        <NameLabel :name="`timeline-ranges width: ${width}`" inverted/>
-        <TimelineRange/>
+    <div
+        ref="timelineRanges"
+        class="timeline-ranges"
+        :style="`width: ${store.timelineContentWidth}px;`"
+    >
+        <NameLabel :name="`timeline-ranges width: ${store.timelineContentWidth}`"/>
+        <TimelineRange
+            v-for="(item, index) in store.timelineRangeCount"
+            :key="index"
+            :width="store.timelineRangeWidth"
+        />
     </div>
 </template>
 

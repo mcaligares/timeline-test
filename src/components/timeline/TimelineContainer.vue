@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import TimelineRanges from './TimelineRanges.vue';
 import TimelineInfo from './TimelineInfo.vue';
 import TimelineTrack from './TimelineTrack.vue';
@@ -8,10 +8,23 @@ import { useEditorStore } from '../../stores/editorStore';
 
 const store = useEditorStore()
 const timelineInfo = ref(null)
+const timelineRanges = ref(null)
 
 const onScroll = (e) => {
     timelineInfo.value.scrollTop = e.target.scrollTop
 }
+
+const onResize = () => {
+    store.timelineContentWidth = timelineRanges.value.offsetWidth
+}
+
+onMounted(() => {
+    onResize()
+    window.addEventListener('resize', onResize)
+})
+onUnmounted(() => {
+    window.removeEventListener('resize', onResize)
+})
 </script>
 
 <template>
@@ -24,12 +37,16 @@ const onScroll = (e) => {
                 :key="index"
             />
         </div>
-        <div class="timeline-content" @scroll="onScroll">
-            <TimelineRanges :width="store.timelineRangeWidth"/>
+        <div
+            ref="timelineRanges"
+            class="timeline-content"
+            @scroll="onScroll"
+        >
+            <TimelineRanges/>
             <TimelineTrack
                 v-for="(item, index) in store.timelineTracksCount"
                 :key="index"
-                :width="store.timelineRangeWidth"
+                :width="store.timelineContentWidth"
             />
         </div>
     </div>
