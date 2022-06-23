@@ -12,7 +12,7 @@ import EditorTimeline from './EditorTimeline.vue';
             <EditorPlayer class="editor-panel player"/>
         </div>
         <div class="editor-bottom">
-            <EditorTimeline class="editor-panel timeline"/>
+            <EditorTimeline class="editor-panel"/>
         </div>
     </div>
 </template>

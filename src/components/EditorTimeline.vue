@@ -1,3 +1,7 @@
+<script setup>
+import TimelineContainer from './timeline/TimelineContainer.vue';
+</script>
+
 <template>
-    <h1>Editor Timeline Panel</h1>
+    <TimelineContainer/>
 </template>
