@@ -1,6 +1,11 @@
+<script setup>
+import NameLabel from '../utils/NameLabel.vue';
+</script>
+
 <template>
+    <NameLabel name="timeline-range"/>
     <div class="timeline-range">
-        <h5>timeline-range</h5>
+
     </div>
 </template>
 
@@ -10,6 +15,6 @@
 .timeline-range {
     min-width: 150px - 2px;
     height: $timeline-range-height;
-    background-color: rgba(#000, 0.2);
+    background-color: rgba(#000, 0.1);
 }
 </style>

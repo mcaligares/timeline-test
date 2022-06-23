@@ -1,6 +1,10 @@
+<script setup>
+import NameLabel from '../utils/NameLabel.vue';
+</script>
+
 <template>
+    <NameLabel name="timeline-info"/>
     <div class="timeline-info-item">
-        <h3>Track Info</h3>
     </div>
 </template>
 

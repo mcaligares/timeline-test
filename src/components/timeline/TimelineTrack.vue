@@ -1,4 +1,5 @@
 <script setup>
+import NameLabel from '../utils/NameLabel.vue';
 defineProps({
     width: Number
 })
@@ -6,7 +7,7 @@ defineProps({
 
 <template>
     <div class="timeline-track" :style="`width: ${width}px;`">
-        <h3>Timeline Track</h3>
+        <NameLabel name="timeline-track"/>
     </div>
 </template>
 
@@ -14,9 +15,8 @@ defineProps({
 @import '../../styles/variables.scss';
 
 .timeline-track {
-    width: 100%;
+    min-width: 100%;
     height: $timeline-track-height;
-    background-color: rgba(#000, 0.1);
 }
 
 </style>

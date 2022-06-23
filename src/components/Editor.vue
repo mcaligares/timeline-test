@@ -8,8 +8,8 @@ import EditorTimeline from './EditorTimeline.vue';
 <template>
     <div class="editor">
         <div class="editor-top">
-            <EditorBrowser class="editor-panel browser"/>
-            <EditorPlayer class="editor-panel player"/>
+            <EditorBrowser class="editor-panel"/>
+            <EditorPlayer class="editor-panel"/>
         </div>
         <div class="editor-bottom">
             <EditorTimeline class="editor-panel"/>
@@ -35,9 +35,6 @@ import EditorTimeline from './EditorTimeline.vue';
 .editor-panel {
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: lightgray;
 }
 </style>
