@@ -4,8 +4,9 @@ export const useEditorStore = defineStore('editor', {
   state: () => {
     return {
       timelineRangeCount: 4,
-      timelineContentWidth: 100,
+      timelineContentWidth: 1900,
       timelineTracksCount: 1,
+      timelineClipPerTrack: 0,
     }
   },
   getters: {

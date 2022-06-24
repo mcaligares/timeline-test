@@ -8,6 +8,7 @@ defineProps({
 <template>
     <div class="timeline-track" :style="`width: ${width}px;`">
         <NameLabel name="timeline-track"/>
+        <slot/>
     </div>
 </template>
 
@@ -15,6 +16,7 @@ defineProps({
 @import '../../styles/variables.scss';
 
 .timeline-track {
+    display: flex;
     min-width: 100%;
     height: $timeline-track-height;
 }

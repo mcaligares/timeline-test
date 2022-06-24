@@ -4,20 +4,18 @@ import TimelineRanges from './TimelineRanges.vue';
 import TimelineInfo from './TimelineInfo.vue';
 import TimelineTrack from './TimelineTrack.vue';
 import NameLabel from '../utils/NameLabel.vue';
+import TimelineClip from './TimelineClip.vue';
 import { useEditorStore } from '../../stores/editorStore';
 
 const store = useEditorStore()
 const timelineInfo = ref(null)
 const timelineRanges = ref(null)
-
 const onScroll = (e) => {
     timelineInfo.value.scrollTop = e.target.scrollTop
 }
-
 const onResize = () => {
     store.timelineContentWidth = timelineRanges.value.offsetWidth
 }
-
 onMounted(() => {
     onResize()
     window.addEventListener('resize', onResize)
@@ -47,7 +45,12 @@ onUnmounted(() => {
                 v-for="(item, index) in store.timelineTracksCount"
                 :key="index"
                 :width="store.timelineContentWidth"
-            />
+            >
+                <TimelineClip
+                    v-for="(item, index) in store.timelineClipPerTrack"
+                    :key="index"
+                />
+            </TimelineTrack>
         </div>
     </div>
 </template>
