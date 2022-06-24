@@ -9,6 +9,9 @@ export const useEditorStore = defineStore('editor', {
     }
   },
   getters: {
-    timelineRangeWidth: (state) => state.timelineContentWidth / state.timelineRangeCount,
+    timelineRangeWidth: (state) => {
+      const borderWidth = state.timelineRangeCount - 1
+      return (state.timelineContentWidth - borderWidth) / state.timelineRangeCount
+    },
   }
 })
