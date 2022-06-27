@@ -41,16 +41,42 @@ onUnmounted(() => {
             @scroll="onScroll"
         >
             <TimelineRanges/>
-            <TimelineTrack
-                v-for="(item, index) in store.timelineTracksCount"
-                :key="index"
-                :width="store.timelineContentWidth"
-            >
-                <TimelineClip
-                    v-for="(item, index) in store.timelineClipPerTrack"
-                    :key="index"
-                />
-            </TimelineTrack>
+            <div class="timeline-tracks">
+                <div
+                    class="timeline-graphic-tracks"
+                    :style="`width: ${store.timelineContentWidth}px;`"
+                >
+                    <TimelineTrack
+                        v-for="(item, index) in store.timelineGraphicTracksCount"
+                        :key="index"
+                    >
+                        <TimelineClip
+                            v-if="index === 0"
+                            v-for="(item, index) in store.timelineGraphicClipsCount"
+                            :key="index"
+                            :method="store.useIntereactMethod ? 'interactjs' : 'draggable'"
+                            type="graphic"
+                        />
+                    </TimelineTrack>
+                </div>
+                <div
+                    class="timeline-audio-tracks"
+                    :style="`width: ${store.timelineContentWidth}px;`"
+                >
+                    <TimelineTrack
+                        v-for="(item, index) in store.timelineAudioTracksCount"
+                        :key="index"
+                    >
+                        <TimelineClip
+                            v-if="index === 0"
+                            v-for="(item, index) in store.timelineAudioClipsCount"
+                            :key="index"
+                            :method="store.useIntereactMethod ? 'interactjs' : 'draggable'"
+                            type="audio"
+                        />
+                    </TimelineTrack>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -78,11 +104,24 @@ onUnmounted(() => {
         overflow: auto;
         width: calc(100% - $timeline-info-width);
         background-color: lightgreen;
-        .timeline-track:nth-child(even) {
-            background-color: rgba(#000, 0.15);
-        }
-        .timeline-track:nth-child(odd) {
-            background-color: rgba(#000, 0.17);
+        .timeline-tracks {
+            .timeline-audio-tracks {
+                background-color: rgba(255, 255, 142, 0.8);
+            }
+            .timeline-graphic-tracks {
+                background-color: rgba(142, 178, 255, 0.8);
+            }
+            .timeline-audio-tracks,
+            .timeline-graphic-tracks {
+                display: grid;
+            }
+            height: calc(100% - $timeline-range-height);
+            .timeline-track:nth-child(even) {
+                background-color: rgba(#000, 0.15);
+            }
+            .timeline-track:nth-child(odd) {
+                background-color: rgba(#000, 0.17);
+            }
         }
     }
 }

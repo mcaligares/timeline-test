@@ -5,11 +5,17 @@ export const useEditorStore = defineStore('editor', {
     return {
       timelineRangeCount: 4,
       timelineContentWidth: 1900,
-      timelineTracksCount: 1,
-      timelineClipPerTrack: 0,
+      timelineAudioTracksCount: 2,
+      timelineAudioClipsCount: 1,
+      timelineGraphicTracksCount: 2,
+      timelineGraphicClipsCount: 1,
+      useIntereactMethod: false
     }
   },
   getters: {
+    timelineTracksCount: (state) => {
+      return state.timelineAudioTracksCount + state.timelineGraphicTracksCount
+    },
     timelineRangeWidth: (state) => {
       const borderWidth = state.timelineRangeCount - 1
       return (state.timelineContentWidth - borderWidth) / state.timelineRangeCount

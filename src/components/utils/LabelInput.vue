@@ -1,5 +1,5 @@
 <script setup>
-defineProps(['label', 'modelValue'])
+defineProps(['label', 'modelValue', 'type'])
 const emit = defineEmits(['update:modelValue'])
 </script>
 
@@ -8,8 +8,9 @@ const emit = defineEmits(['update:modelValue'])
         <label class="label-input__label">{{label}}</label>
         <input
             class="label-input__input"
-            type="text"
+            :type="type || 'text'"
             :value="modelValue"
+            :checked="modelValue"
             @input="emit('update:modelValue', $event.target.value)"
         />
     </div>
@@ -20,7 +21,8 @@ const emit = defineEmits(['update:modelValue'])
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 10px;
     margin-bottom: 10px;
     &__label {
         font-family: monospace;
