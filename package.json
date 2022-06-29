@@ -5,12 +5,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "serve ./dist"
   },
   "dependencies": {
     "draggabilly": "^3.0.0",
     "interactjs": "^1.10.14",
     "pinia": "^2.0.14",
+    "serve": "^13.0.2",
     "vue": "^3.2.25"
   },
   "devDependencies": {

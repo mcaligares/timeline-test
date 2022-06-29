@@ -1,8 +1,8 @@
 <script setup>
-import interact from 'interactjs'
-import * as Draggabilly from 'draggabilly'
 import { onMounted, ref, reactive } from 'vue';
-import { useEditorStore } from '../../stores/editorStore';
+import interact from 'interactjs'
+import Draggabilly from 'draggabilly'
+import DraggableJs from '../../libs/draggable'
 import NameLabel from '../utils/NameLabel.vue';
 
 const props = defineProps({
@@ -36,22 +36,43 @@ const initializeInteract = () => {
                 position.x += event.dx;
                 position.y += event.dy;
                 timelineClip.value.style.transform = `translate(${position.x}px, ${position.y}px)`;
-                console.log('event', event.dx, event.dy)
+                console.log('[interact] event move', event.dx, event.dy)
             },
         },
     })
 }
 const initializeDraggabilly = () => {
     textClip.value = `Draggabilly - ${props.type}`
-    new Draggabilly(timelineClip.value, {
+    const draggie = new Draggabilly(timelineClip.value, {
         containment: getRestrictionClassByType(),
         grid: [0, 70]
+    })
+    Array.from(['dragStart', 'dragMove', 'dragEnd', 'pointerDown', 'pointerMove', 'pointerUp', 'staticClick']).forEach(event => {
+        draggie.on(event, () => console.log(`[draggablilly] event ${event}`))
+    })
+}
+const initializeDraggable = () => {
+    textClip.value = `Draggable - ${props.type}`
+    new DraggableJs(timelineClip.value, {
+        grid:90,
+        limit: document.querySelector(getRestrictionClassByType()),
+        onDrag: function (elem, x, y) {
+            console.log('[draggable] event drag', x, y)
+        },
+        onDragStart: function (elem, x, y) {
+            console.log('[draggable] event drag start', x, y)
+        },
+        onDragEnd: function (elem, x, y) {
+            console.log('[draggable] event drag end', x, y)
+        },
     })
 }
 
 onMounted(() => {
-    if (props.method === 'interactjs') {
+    if (props.method === 'interact') {
         initializeInteract()
+    } else if (props.method === 'draggable') {
+        initializeDraggable()
     } else {
         initializeDraggabilly()
     }

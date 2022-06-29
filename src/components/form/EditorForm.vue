@@ -10,7 +10,6 @@ const audioClips = ref('1')
 const graphicTracks = ref('2')
 const graphicClips = ref('1')
 const ranges = ref('4')
-const interactMethod = ref(true)
 
 const onSubmit = () => {
     try {
@@ -20,19 +19,22 @@ const onSubmit = () => {
         store.timelineAudioClipsCount = Number.parseInt(audioClips.value)
         store.timelineGraphicClipsCount = Number.parseInt(graphicClips.value)
         store.timelineGraphicTracksCount = Number.parseInt(graphicTracks.value)
-        console.log(interactMethod.value)
-        if (store.useIntereactMethod != interactMethod.value) {
-            store.useIntereactMethod = interactMethod.value
-            store.timelineAudioClipsCount = 0
-            store.timelineGraphicClipsCount = 0
-            setTimeout(() => {
-                console.log(interactMethod.value)
-                store.timelineAudioClipsCount = Number.parseInt(audioClips.value)
-                store.timelineGraphicClipsCount = Number.parseInt(graphicClips.value)
-            }, 1500)
-        }
     } catch (e) {
-        console.log('Error', e)
+        console.error('Error', e)
+    }
+}
+
+const onChangeMethod = (method) => {
+    try {
+        store.timelineMethod = method
+        store.timelineAudioClipsCount = 0
+        store.timelineGraphicClipsCount = 0
+        setTimeout(() => {
+            store.timelineAudioClipsCount = Number.parseInt(audioClips.value)
+            store.timelineGraphicClipsCount = Number.parseInt(graphicClips.value)
+        }, 800)
+    } catch (e) {
+        console.error('Error', e)
     }
 }
 </script>
@@ -45,8 +47,12 @@ const onSubmit = () => {
         <LabelInput label="nº audio tracks" v-model="audioTracks"/>
         <LabelInput label="nº graphic clips" v-model="graphicClips"/>
         <LabelInput label="nº graphic tracks" v-model="graphicTracks"/>
-        <LabelInput label="interact method" type="checkbox" v-model="interactMethod"/>
 
+        <p>
+            <button type="button" @click="onChangeMethod('draggable')">use draggable method</button>
+            <button type="button" @click="onChangeMethod('interact')">use interactJS method</button>
+            <button type="button" @click="onChangeMethod('draggabilly')">use draggabilly method</button>
+        </p>
         <button type="submit">submit</button>
     </form>
 </template>

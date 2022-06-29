@@ -9,7 +9,7 @@ export const useEditorStore = defineStore('editor', {
       timelineAudioClipsCount: 1,
       timelineGraphicTracksCount: 2,
       timelineGraphicClipsCount: 1,
-      useIntereactMethod: false
+      timelineMethod: 'draggabilly',
     }
   },
   getters: {

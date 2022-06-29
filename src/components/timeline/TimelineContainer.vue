@@ -54,7 +54,7 @@ onUnmounted(() => {
                             v-if="index === 0"
                             v-for="(item, index) in store.timelineGraphicClipsCount"
                             :key="index"
-                            :method="store.useIntereactMethod ? 'interactjs' : 'draggable'"
+                            :method="store.timelineMethod"
                             type="graphic"
                         />
                     </TimelineTrack>
@@ -71,7 +71,7 @@ onUnmounted(() => {
                             v-if="index === 0"
                             v-for="(item, index) in store.timelineAudioClipsCount"
                             :key="index"
-                            :method="store.useIntereactMethod ? 'interactjs' : 'draggable'"
+                            :method="store.timelineMethod"
                             type="audio"
                         />
                     </TimelineTrack>
@@ -113,7 +113,7 @@ onUnmounted(() => {
             }
             .timeline-audio-tracks,
             .timeline-graphic-tracks {
-                display: grid;
+                position: relative;
             }
             height: calc(100% - $timeline-range-height);
             .timeline-track:nth-child(even) {
