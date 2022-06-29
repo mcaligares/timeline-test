@@ -6,10 +6,13 @@ export const useEditorStore = defineStore('editor', {
       timelineRangeCount: 4,
       timelineContentWidth: 1900,
       timelineAudioTracksCount: 2,
-      timelineAudioClipsCount: 1,
+      timelineAudioClipsCount: 0,
+      timelineAudioClips: [],
       timelineGraphicTracksCount: 2,
-      timelineGraphicClipsCount: 1,
+      timelineGraphicClipsCount: 0,
+      timelineGraphicClips: [],
       timelineMethod: 'draggabilly',
+      timelineCalculateRange: 0
     }
   },
   getters: {
@@ -17,8 +20,21 @@ export const useEditorStore = defineStore('editor', {
       return state.timelineAudioTracksCount + state.timelineGraphicTracksCount
     },
     timelineRangeWidth: (state) => {
-      const borderWidth = state.timelineRangeCount - 1
-      return (state.timelineContentWidth - borderWidth) / state.timelineRangeCount
+      if (state.timelineCalculateRange) {
+        return state.timelineCalculateRange
+      } else {
+        const borderWidth = state.timelineRangeCount - 1
+        return (state.timelineContentWidth - borderWidth) / state.timelineRangeCount
+      }
     },
+  },
+  actions: {
+    addClip(clip) {
+      if (clip && clip.type === 'graphic') {
+        this.timelineGraphicClips = [...this.timelineGraphicClips, clip]
+      } else {
+        this.timelineAudioClips = [...this.timelineAudioClips, clip]
+      }
+    }
   }
 })

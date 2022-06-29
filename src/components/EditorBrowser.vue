@@ -1,11 +1,11 @@
 <script setup>
 import NameLabel from './utils/NameLabel.vue';
-import EditorForm from './form/EditorForm.vue';
+import StoreForm from './form/StoreForm.vue';
 </script>
 
 <template>
     <div>
         <NameLabel name="editor-browser"/>
-        <EditorForm/>
+        <StoreForm/>
     </div>
 </template>

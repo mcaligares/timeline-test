@@ -7,7 +7,9 @@ import NameLabel from '../utils/NameLabel.vue';
 
 const props = defineProps({
     type: String,
-    method: String
+    method: String,
+    width: Number,
+    duration: Number
 })
 const textClip = ref('')
 const timelineClip = ref(null)
@@ -80,9 +82,13 @@ onMounted(() => {
 </script>
 
 <template>
-    <div ref="timelineClip" class="timeline-clip">
+    <div
+        ref="timelineClip"
+        class="timeline-clip"
+        :style="`width: ${props.width}px`"
+    >
         <NameLabel name="timeline-clip"/>
-        {{ textClip }}
+        {{ textClip }} {{ props.duration ? ' - ' + props.duration : '' }}
     </div>
 </template>
 

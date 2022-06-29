@@ -59,7 +59,7 @@ const onChangeMethod = (method) => {
 
 <style lang="scss">
 .form {
-    width: 50%;
+    width: 70%;
     padding: 10px;
 }
 </style>

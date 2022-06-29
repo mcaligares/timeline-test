@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import TimelineRange from './TimelineRange.vue';
 import NameLabel from '../utils/NameLabel.vue';
 import { useEditorStore } from '../../stores/editorStore';

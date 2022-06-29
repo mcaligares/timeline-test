@@ -1,10 +1,12 @@
 <script setup>
 import NameLabel from './utils/NameLabel.vue';
+import ClipForm from './form/ClipForm.vue';
 </script>
 
 <template>
     <div class="editor-player">
         <NameLabel name="editor-player"/>
+        <ClipForm/>
     </div>
 </template>
 

@@ -57,6 +57,15 @@ onUnmounted(() => {
                             :method="store.timelineMethod"
                             type="graphic"
                         />
+                        <TimelineClip
+                            v-if="index === 1"
+                            v-for="(item, index) in store.timelineGraphicClips"
+                            :key="index"
+                            :method="store.timelineMethod"
+                            type="graphic"
+                            :width="item.width"
+                            :duration="item.duration"
+                        />
                     </TimelineTrack>
                 </div>
                 <div
@@ -73,6 +82,15 @@ onUnmounted(() => {
                             :key="index"
                             :method="store.timelineMethod"
                             type="audio"
+                        />
+                        <TimelineClip
+                            v-if="index === 1"
+                            v-for="(item, index) in store.timelineAudioClips"
+                            :key="index"
+                            :method="store.timelineMethod"
+                            type="audio"
+                            :width="item.width"
+                            :duration="item.duration"
                         />
                     </TimelineTrack>
                 </div>
